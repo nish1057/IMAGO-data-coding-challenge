@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: stg_positions
+    description: "Staged position-level revenue data with basic cleaning and placeholder flagging"
+    columns:
+      - name: id
+        description: "Primary key of the position"
+        tests:
+          - not_null
+          - unique
+
+      - name: ReId
+        description: "Foreign key to invoices"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_invoices')
+              field: ReNummer
+
+      - name: KdNr
+        description: "Foreign key to customers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: Kdnr
+
+      - name: Nettobetrag
+        description: "Net revenue amount"
+        tests:
+          - not_null
+
+      - name: Bildnummer
+        description: "Media ID, may contain placeholders"
+        tests:
+          - not_null
+
+      - name: VerDatum
+        description: "Media usage date"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: '2023-01-01'
+              max_value: '2025-12-31'
+              strictly: false
+
+  - name: stg_invoices
+    description: "Staged invoice data with date normalization"
+    columns:
+      - name: ReNummer
+        description: "Primary key of the invoice"
+        tests:
+          - not_null
+          - unique
+
+      - name: ReDatum
+        description: "Invoice date"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: '2023-01-01'
+              max_value: '2025-12-31'
+              strictly: false
+
+  - name: stg_customers
+    description: "Staged customer dimension data with character validation"
+    columns:
+      - name: id
+        description: "Primary key of the customer record"
+        tests:
+          - not_null
+          - unique
+
+      - name: Kdnr
+        description: "Customer number used as foreign key"
+        tests:
+          - not_null
+          - unique
+
+      - name: Verlagsname
+        description: "Publisher name, should not contain unexpected special characters"
+        tests:
+          - not_null
+
+      - name: Region
+        description: "Customer region"
+        tests:
+          - not_null
