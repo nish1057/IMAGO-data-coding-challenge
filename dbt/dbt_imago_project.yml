@@ -1,0 +1,37 @@
+name: dbt_imago_project
+version: '1.0'
+config-version: 2
+
+profile: imago_profile
+
+model-paths: ["models"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets: ["target", "dbt_modules"]
+
+# Materialization + schema settings
+models:
+  dbt_imago_project:
+    +materialized: view
+
+    staging:
+      +schema: staging
+      +materialized: view
+      +store_failures: true
+
+    intermediate:
+      +schema: intermediate
+      +materialized: table
+
+    marts:
+      +schema: marts
+      +materialized: table
+
+tests:
+  +store_failures: true
+  +schema: tests
