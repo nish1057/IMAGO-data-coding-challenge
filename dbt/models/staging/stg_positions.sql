@@ -8,7 +8,7 @@ SELECT
     Bildnummer,
     CAST(VerDatum AS DATE) AS VerDatum,
     CASE
-        WHEN Bildnummer = 100000000 THEN TRUE
+        WHEN Bildnummer IN (100000000) THEN TRUE
         ELSE FALSE
     END AS is_placeholder_media
 FROM {{ source('raw', 'Abrechnung_Positionen') }}
