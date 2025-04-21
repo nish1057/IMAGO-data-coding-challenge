@@ -12,7 +12,8 @@ The `notebooks/` directory contains a full exploratory notebook that tackles the
 - How many positions are linked to invoices missing payment info?
 - How much revenue is attributed to the placeholder media ID `100000000`?
 - How many invoices have no positions attached? 
-   *Includes data type fixes, targeted quality checks, orphaned record analysis, and revenue attribution logic.*
+
+  *Includes data type fixes, targeted quality checks, orphaned record analysis, and revenue attribution logic.*
 
 
 ## Part 2: Data Pipeline Proposal (dbt)
