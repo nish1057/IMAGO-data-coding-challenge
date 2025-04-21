@@ -8,15 +8,15 @@ and a proposed modern data pipeline using dbt and Snowflake.
 
 The `notebooks/` directory contains a full exploratory notebook that tackles the initial diagnostic questions using `pandas`.
 
-# Key questions answered:
+### Key questions answered:
 - How many positions are linked to invoices missing payment info?
 - How much revenue is attributed to the placeholder media ID `100000000`?
 - How many invoices have no positions attached? 
 
-  *Includes data type fixes, targeted quality checks, orphaned record analysis, and revenue attribution logic.*
+  *Includes data type fixes, targeted quality checks, orphaned record analysis, and revenue attribution logic.
 
 
-## Part 2: Data Pipeline Proposal (dbt)
+# Part 2: Data Pipeline Proposal (dbt)
 
 The `dbt/` directory mimics the structure of a dbt project and contains SQL models that represent a clean, modular transformation pipeline.
 
@@ -33,7 +33,7 @@ Includes data quality checks using `schema.yml` and `dbt-expectations`.
 
 ---
 
-## Architecture Summary
+# Architecture Summary
 
 - Data is ingested from legacy sources (Excel, Access) via SSIS pipelines
 - Loaded into Snowflake's `raw` layer
@@ -44,7 +44,7 @@ Includes data quality checks using `schema.yml` and `dbt-expectations`.
  *Architecture Diagram Included in Presentation
 
 
-## Communication & Stakeholder Awareness
+# Communication & Stakeholder Awareness
 
 This project also considers business alignment and risks. Specific conversations have been mapped for:
 
